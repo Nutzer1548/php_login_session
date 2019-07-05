@@ -1,12 +1,11 @@
-Login Status: <?php
-@require_once('session.php');
-if(!$PLS['logged_in']){
+<?php @require_once('pls/session.php'); ?>Login Status:<?php
+if(!$_SESSION['logged_in']){
 	echo 'nicht eingelogged!<br/>';
-	if($PLS['error']!==null) echo '<b>Fehler: '.$PLS['error'].'</b>';
+	if($_SESSION['error']!==null) echo '<b>Fehler: '.$_SESSION['error'].'</b>';
 	@include('login_form.php');
 }else{
-	//echo 'login-versuch unternommen für '.$PLS['logged_in'];
-	echo 'eingelogged als '.$PLS['user_name'].'! [id: '.$PLS['user_id'].']<br/>';
+	//echo 'login-versuch unternommen für '.$_SESSION['logged_in'];
+	echo 'eingelogged als '.$_SESSION['user_name'].'! [id: '.$_SESSION['user_id'].']<br/>';
 	echo '<a href="?logout=logout">[ Abmelden ]</a>';
 }
 ?>

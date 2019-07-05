@@ -1,8 +1,8 @@
 <?php
 /* expects an activation-key in $_GET['key'] to verify the email-address in $_GET['email']
 input:
-	@_GET['email']: the email-address to verify
-	@_GET['key']: the verification key
+	$_GET['email']: the email-address to verify
+	$_GET['key']: the verification key
 output/return-array:
 	['ok']: true, if activated
 	['error']: null, if no error occured. An error message otherwise.
@@ -58,7 +58,7 @@ function activate_account(){
 	// '- 2. delete task
 	$result_task=$sql->query('delete from task_activate_user where id='.$row['t_id'].';');
 	if($result_task===false){
-		$ret['error']='Couldn\'t remove activation task. Please contact admin.'
+		$ret['error']='Couldn\'t remove activation task. Please contact admin.';
 	}
 	
 	

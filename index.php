@@ -1,4 +1,4 @@
-<?php @require_once('session.php'); ?>
+<?php @require_once('pls/session.php'); ?>
 <!doctype html>
 <html><head><title>PhP-Login-Session</title>
 <meta charset="UTF-8"/>

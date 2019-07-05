@@ -10,7 +10,7 @@ create table users(
 	login_last_date date,
 --	verify_string varchar(128) not null,
 
-	flags bit(1) default 0, -- 0x01 = activated
+	flags bit(1) default 0 not null, -- 0x01 = activated
 
 	primary key (id),
 	unique(login_email)

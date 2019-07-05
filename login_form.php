@@ -6,7 +6,7 @@
 <hr/>
 <form method="post" id="regform">
 	<h3>Registrieren:</h3>
-	<label for="reg_name">Name:</label><input type="text" id="reg_name" name="reg_name" /><br/>
-	<label for="reg_pass">Passwort:</label><input type="password" id="reg_pass" name="reg_pass" /><br/>
+	<label for="reg_name">Name:</label><input type="text" id="reg_name" name="email" /><br/>
+	<label for="reg_pass">Passwort:</label><input type="password" id="reg_pass" name="password" /><br/>
 	<input type="submit" name="login_reg" value="Registrieren"/>
 </form>

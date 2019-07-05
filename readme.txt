@@ -16,3 +16,12 @@ todo:
 - study charsets in mysql/mariadb
 - use php exception handling
 
+
+done:
+- db_table.sql:
+	- 'not null' for user flags
+- 'pls' subfolder system
+- session.php: only use $_SESSION as variable
+- implemented 'register_account'-logic
+
+
