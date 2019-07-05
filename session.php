@@ -63,7 +63,7 @@ if($s->get('start',false)===false) die('ERROR: session not startet!');
 $PLS=[];
 $PLS['logged_in']=false;
 $PLS['error']=null;
-$PLS['id']=-1;
+$PLS['user_id']=-1;
 
 if(isset($_SESSION['user_id'])){
 	$PLS['logged_in']=true;

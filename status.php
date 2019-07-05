@@ -6,7 +6,7 @@ if(!$PLS['logged_in']){
 	@include('login_form.php');
 }else{
 	//echo 'login-versuch unternommen für '.$PLS['logged_in'];
-	echo 'eingelogged als '.$PLS['user_name'].'!<br/>';
+	echo 'eingelogged als '.$PLS['user_name'].'! [id: '.$PLS['user_id'].']<br/>';
 	echo '<a href="?logout=logout">[ Abmelden ]</a>';
 }
 ?>

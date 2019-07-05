@@ -7,5 +7,12 @@ secure 'db_config.php'
 
 todo:
 - everthing in 'important'
-- remove error_reporting from all files
-- 
+- remove error_reporting / display errors from all files
+- support for 'registering'
+	- comparing with email-block-list
+	- verification of email / registering user
+- at least an option to seperate user_name from user_mail
+- delete unactivated users after x days 
+- study charsets in mysql/mariadb
+- use php exception handling
+

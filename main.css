@@ -21,9 +21,11 @@ iframe{
 	padding:16px;
 }
 
-#loginform label{
+#loginform label,
+#regform label{
 	display:inline-block;
 	width:80px;
 	text-align:right;
 	margin-right:5px;
 }
+
