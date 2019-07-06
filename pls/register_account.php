@@ -2,9 +2,9 @@
 /* creates an new (unactivated) account
 
 input:
+	$_POST['login_reg']: (needs to be set/existent)
 	$_POST['email']: email-adress of new user
 	$_POST['password']: unhashed password
-	$_POST['login_reg']: (needs to be set/existent)
 output/return-array:
 	['ok']: true if registered (still needs to be activated)
 	['error']: null if everything is ok, otherwise an error-message
@@ -67,7 +67,9 @@ function register_account(){
 	$user_id=$sql->insert_id;
 
 	// create activation task
-	$verify_string=$sql->escape_string(base64_encode(random_bytes(30)));
+	$verify_string=base64_encode(random_bytes(30));
+	$verify_string=str_replace(array('+','/','='), array('-','_',''), $verify_string); // mask for url-usage
+	$verify_string=$sql->escape_string($verify_string);
 	$result=$sql->query('insert into task_aactivate_user (user_id, verify_string) values ('.$user_id.', "'.$verify_string.'")');
 	if($result!==true){
 		$ret['error']='Unable to create activation task. Please contact admin.';
@@ -78,6 +80,7 @@ function register_account(){
 	$ret['ok']=true;
 
 	// send email with activation-link+
+	// todo: build a template for this.
 	$to=$email; // <- is sql-escaped, but that's not bad. valid emails will not be altered by sql-escape// $_POST['email'];
 	$subject='Welcom. Verify your account.';
 if(empty($_SERVER['REQUEST_SCHEME'])) $_SERVER['REQUEST_SCHEME']='http';

@@ -10,7 +10,7 @@ create table users(
 	login_last_date date,
 --	verify_string varchar(128) not null,
 
-	flags bit(1) default 0 not null, -- 0x01 = activated
+	flags tinyint unsigned default 0 not null, -- 0x01 = activated
 
 	primary key (id),
 	unique(login_email)
@@ -42,4 +42,4 @@ create table task_activate_user(
 ) default charset=utf8 collate=utf8_unicode_ci;
 
 insert into task_activate_user (user_id, verify_string) values
-	(1,'yDsNMZiIKLJG9AW2giOeOZwHRt4em/Izk+RyUPBs');
+	(1,'yDsNMZiIKLJG9AW2giOeOZwHRt4em_Izk-RyUPBs');

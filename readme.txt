@@ -12,24 +12,23 @@ How to use:
 - 
 
 
-important:
-==========
-secure 'db_config.php'
 
 todo:
 =====
-- everthing in 'important'
-- remove error_reporting / display errors from all files
-- support for 'registering'
-	- comparing with email-block-list
-	- verification of email / registering user
-- at least an option to seperate user_name from user_mail
-- delete unactivated users after x days 
-- study charsets in mysql/mariadb
-- use php exception handling
-
+[ ] remove error_reporting / display errors from all files
+[.] support for 'registering'
+	[.] comparing with email-block-list
+[ ] at least an option to seperate user_name from user_mail
+[ ] delete unactivated users after x days 
+[ ] study charsets in mysql/mariadb
+[ ] use php exception handling
+[ ] add template for registration-email.
 
 done:
 =====
-Moved db_config, to subdir. Cleant comments in db.php.
-
+added no-cache to index.php, for development.
+[x] realized: bit in mysql works like a nightmare with php. Changed it to tinyint!
+[x] session.php: cleanup. check for activated account.
+cleanup activationcode for url-use.
+added account activation.
+[x] verification of email / registering user

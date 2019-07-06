@@ -29,3 +29,16 @@ iframe{
 	margin-right:5px;
 }
 
+.warning{
+	padding:8px 2px;
+	margin:2px -3px;
+	background:ffeeee;
+	border:1px solid #ddcccc;
+	color:#440000;
+	font-size:110%;
+	max-width:250px;
+}
+
+.warning span:first-child{
+	font-weight:bold;
+}
