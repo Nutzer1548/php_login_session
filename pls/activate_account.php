@@ -10,7 +10,10 @@ output/return-array:
 todo: when it's realy important to contact the admin, perhaps contact the admin automatically per email.
 */
 
+@require_once('db.php');
+
 function activate_account(){
+	global $sql;
 	$ret['ok']=false;
 	$ret['error']=null;
 
@@ -18,7 +21,6 @@ function activate_account(){
 	if(!isset($_GET['email'])) return $ret;
 
 
-	@require_once('db.php');
 
 	$key=@$_GET['key'];
 	$email=@$_GET['email'];

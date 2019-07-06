@@ -6,6 +6,7 @@
 
 // connect to mysql server
 $sql=new mysqli($db_host, $db_user, $db_pass, $db_db);
+if($sql===null) die('ERROR: no database');
 if($sql->connect_error){
 	die('connect error ('.$sql->connect_errno.') '.$sql->connect_error);
 }

@@ -15,8 +15,9 @@ return: populates $_SESSION with these fields:
 error_reporting(E_ALL);
 ini_set('error_reporting', E_ALL);
 
-function session(){
 @require_once('db.php');
+function session(){
+	global $sql;
 	$session_options=[
 		'name' => 'pls_session',
 	//	'cookie_lifetime' => 3600*24,

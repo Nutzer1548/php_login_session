@@ -15,6 +15,7 @@ output/return-array:
 @require_once('db.php');
 
 function register_account(){
+	global $sql;
 	$ret['ok']=false;
 	$ret['error']=null;
 
@@ -45,7 +46,7 @@ function register_account(){
 	}
 
 	// banned?
-	$result=$sql->query('select email from blocked_email where email="'.$email.'";')
+	$result=$sql->query('select email from blocked_email where email="'.$email.'";');
 	if(!is_object($result)){
 		$ret['error']='database error, please contact admin';
 		return $ret;
@@ -58,8 +59,8 @@ function register_account(){
 	}
 
 	// create user
-	$result=$sql->query('insert into users (login_email, login_pass, register_data, flags) values \
-		("'.$email.'", "'.$password.', curdate(), 0");');
+	$q='insert into users (login_email, login_pass, register_date, flags) values ("'.$email.'", "'.$password.'", curdate(), 0);';
+	$result=$sql->query($q);
 	if($result!==true){
 		$ret['error']='Couldn\'t create account. Try again later or contact admin.';
 		return $ret;
@@ -69,10 +70,11 @@ function register_account(){
 	// create activation task
 	$verify_string=base64_encode(random_bytes(30));
 	$verify_string=str_replace(array('+','/','='), array('-','_',''), $verify_string); // mask for url-usage
+	$activate_key=$verify_string;
 	$verify_string=$sql->escape_string($verify_string);
-	$result=$sql->query('insert into task_aactivate_user (user_id, verify_string) values ('.$user_id.', "'.$verify_string.'")');
+	$result=$sql->query('insert into task_activate_user (user_id, verify_string) values ('.$user_id.', "'.$verify_string.'")');
 	if($result!==true){
-		$ret['error']='Unable to create activation task. Please contact admin.';
+		$ret['error']='Unable to create activation task. Please contact admin.'.$sql->error;
 		return $ret;
 	}
 
@@ -81,13 +83,15 @@ function register_account(){
 
 	// send email with activation-link+
 	// todo: build a template for this.
+	include('config.php');
 	$to=$email; // <- is sql-escaped, but that's not bad. valid emails will not be altered by sql-escape// $_POST['email'];
-	$subject='Welcom. Verify your account.';
+	$subject='Welcome. Verify your account.';
 if(empty($_SERVER['REQUEST_SCHEME'])) $_SERVER['REQUEST_SCHEME']='http';
-$uri=$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/';
-$link_activate=$uri.'activate.php';
-$link_ban=$uri.'ban.php';
-	$message="Welcome user,\n\nThanks for registering. To use your newly created account, you have to activate it, just by clicking this link:\n\n".$link_activate."\n\nYou havn't registerd? You can either ignore this mail oder let us lacklist your email-adress, so that you will never receive any more emails from us, by clicking the following link:\n\n".$link_ban.'\n\n';
+//$uri=$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/';
+$token='?key='.urlencode($activate_key).'&email='.urlencode($_POST['email']);
+$link_activate=$PLS['page']['activate'].$token;
+$link_ban=$PLS['page']['ban'].$token;
+	$message="Welcome user,\n\nThanks for registering. To use your newly created account, you have to activate it, just by clicking this link:\n\n".$link_activate."\n\nYou havn't registerd? You can either ignore this mail oder let us lacklist your email-adress, so that you will never receive any more emails from us, by clicking the following link:\n\n".$link_ban."\n\n";
 
 	if(false===mail($to, $subject, $message)){
 		$ret['error']='Couldn\'t send activation email. Please contact admin.';
