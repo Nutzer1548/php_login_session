@@ -1,11 +1,23 @@
 desc:
+=====
 Codesnippet for a website login with mysql/mariadb and php sessions.
 Ment to be modular and simple. Just to seperate/identify users.
 
+How to use:
+===========
+- you need a webserver with support for php7 and mysql
+- 
+- install the mysql-tables. See db_table.sql, but delete possible demonstration values and/or add stuff you need.
+- include the 'session.php' topmost in your php-pages (mainly index.php)
+- 
+
+
 important:
+==========
 secure 'db_config.php'
 
 todo:
+=====
 - everthing in 'important'
 - remove error_reporting / display errors from all files
 - support for 'registering'
@@ -18,10 +30,6 @@ todo:
 
 
 done:
-- db_table.sql:
-	- 'not null' for user flags
-- 'pls' subfolder system
-- session.php: only use $_SESSION as variable
-- implemented 'register_account'-logic
-
+=====
+Moved db_config, to subdir. Cleant comments in db.php.
 
