@@ -91,7 +91,7 @@ if(empty($_SERVER['REQUEST_SCHEME'])) $_SERVER['REQUEST_SCHEME']='http';
 $token='?key='.urlencode($activate_key).'&email='.urlencode($_POST['email']);
 $link_activate=$PLS['page']['activate'].$token;
 $link_ban=$PLS['page']['ban'].$token;
-	$message="Welcome user,\n\nThanks for registering. To use your newly created account, you have to activate it, just by clicking this link:\n\n".$link_activate."\n\nYou havn't registerd? You can either ignore this mail oder let us lacklist your email-adress, so that you will never receive any more emails from us, by clicking the following link:\n\n".$link_ban."\n\n";
+	$message="Welcome user,\n\nThanks for registering. To use your newly created account, you have to activate it, just by clicking this link:\n\n".$link_activate."\n\nYou havn't registerd? You can either ignore this mail oder let us Blacklist your email-adress, so that you will never receive any more emails from us, by clicking the following link:\n\n".$link_ban."\n\n";
 
 	if(false===mail($to, $subject, $message)){
 		$ret['error']='Couldn\'t send activation email. Please contact admin.';

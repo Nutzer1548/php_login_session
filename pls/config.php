@@ -13,7 +13,7 @@ $PLS['homepage']=(isset($_SERVER['REQUEST_SCHEME'])?$_SERVER['REQUEST_SCHEME']:(
 $PLS['page']=array(
 	'activate' => $PLS['homepage'].'activate.php',
 	'ban'      => $PLS['homepage'].'ban.php',
-	'register' => $PLS['homepage'].'register.php'
+	'register' => $PLS['homepage'].'register.php' // <- not needed
 );
 
 //print_r($_SERVER); print_r($PLS);

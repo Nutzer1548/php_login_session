@@ -26,10 +26,10 @@ todo:
 [ ] study charsets in mysql/mariadb
 [ ] use php exception handling
 [ ] add template for registration-email.
-[ ] implement banning
+[ ] complete 'how to use'
 
 done:
 =====
-added config.php with global $PLS holding page-urls
-[x] support for 'registering'
-	[x] comparing with email-block-list
+Remove display of mysql-errors/-queries from activate_account.php.
+Freeing up mysql results.
+[x] implement banning
