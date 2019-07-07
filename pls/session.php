@@ -12,8 +12,8 @@ return: populates $_SESSION with these fields:
 
 
 */
-error_reporting(E_ALL);
-ini_set('error_reporting', E_ALL);
+//error_reporting(E_ALL);
+//ini_set('error_reporting', E_ALL);
 
 @require_once('db.php');
 function session(){

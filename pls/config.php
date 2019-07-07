@@ -16,6 +16,8 @@ $PLS['page']=array(
 	'register' => $PLS['homepage'].'register.php' // <- not needed
 );
 
+$PLS['mail_registration']=__DIR__.'/registration.mail';
+
 //print_r($_SERVER); print_r($PLS);
 
 ?>

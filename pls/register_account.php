@@ -41,7 +41,7 @@ function register_account(){
 	$num_rows=$result->num_rows;
 	$result->free();
 	if($num_rows!=0){
-		$ret['error']='Email is already used. Cant create another account with it.';
+		$ret['error']='Email is already used. Can\'t create another account with it.';
 		return $ret;
 	}
 
@@ -83,15 +83,25 @@ function register_account(){
 
 	// send email with activation-link+
 	// todo: build a template for this.
-	include('config.php');
+	//include('config.php');
+include('config.php');
 	$to=$email; // <- is sql-escaped, but that's not bad. valid emails will not be altered by sql-escape// $_POST['email'];
 	$subject='Welcome. Verify your account.';
-if(empty($_SERVER['REQUEST_SCHEME'])) $_SERVER['REQUEST_SCHEME']='http';
-//$uri=$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['HTTP_HOST'].'/';
-$token='?key='.urlencode($activate_key).'&email='.urlencode($_POST['email']);
-$link_activate=$PLS['page']['activate'].$token;
-$link_ban=$PLS['page']['ban'].$token;
-	$message="Welcome user,\n\nThanks for registering. To use your newly created account, you have to activate it, just by clicking this link:\n\n".$link_activate."\n\nYou havn't registerd? You can either ignore this mail oder let us Blacklist your email-adress, so that you will never receive any more emails from us, by clicking the following link:\n\n".$link_ban."\n\n";
+
+	$token='?key='.urlencode($activate_key).'&email='.urlencode($_POST['email']);
+	$link_activate=$PLS['page']['activate'].$token;
+	$link_ban=$PLS['page']['ban'].$token;
+
+	$message=file_get_contents($PLS['mail_registration']);
+	$message=str_replace(
+		array('{link_activate}', '{link_ban}'),
+		array( $link_activate,    $link_ban),
+		$message);
+	$pos=strpos($message,"\n");
+	if($pos!==false){
+		$subject=substr($message,0,$pos);
+		$message=substr($message,$pos+1);
+	}
 
 	if(false===mail($to, $subject, $message)){
 		$ret['error']='Couldn\'t send activation email. Please contact admin.';
