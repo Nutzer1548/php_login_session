@@ -14,10 +14,13 @@ return: populates $_SESSION with these fields:
 */
 //error_reporting(E_ALL);
 //ini_set('error_reporting', E_ALL);
-
 @require_once('db.php');
+@require_once('config.php');
 function session(){
 	global $sql;
+	global $PLS;
+
+	// start session
 	$session_options=[
 		'name' => 'pls_session',
 	//	'cookie_lifetime' => 3600*24,
@@ -55,20 +58,20 @@ function session(){
 		$user_pass=@$_POST['login_pass'];
 		
 		$result=$sql->query('select id, login_email, login_pass, login_last_date, flags from users where login_email="'.$sql->escape_string($user_name).'";');
-		if($result===false) $_SESSION['error']='ERROR in db query ... please contact admin.';
-		else if($result===true) $_SESSION['error']='ERROR, db shows unexpected behavier ... please contact admin.';
+		if($result===false) $_SESSION['error']=$PLS['error']['query'];
+		else if($result===true) $_SESSION['error']=$PLS['error']['db_unexpected'];
 		else{
 			$row=$result->fetch_assoc();
 			if($row===null){
 				$password_ok=password_verify($user_pass, @$row['login_pass']); // to prevent timing attac to find $user_name
-				$_SESSION['error']='login fehlgeschlagen';
+				$_SESSION['error']=$PLS['error']['login_failed'];
 			}else{
 				$password_ok=password_verify($user_pass, @$row['login_pass']); // to prevent timing attac to find $user_name
 				if(!$password_ok){
-					$_SESSION['error']='login fehlgeschlagen';
+					$_SESSION['error']=$PLS['error']['login_failed'];
 				}else{
 					if((((int)$row['flags'])&0x01)===0){
-						$_SESSION['error']='Your account still needs to be activated. Please check your inbox or your spamfolder, you should have received an activation link.';
+						$_SESSION['error']=$PLS['error']['login_not_activated'];
 					}else{
 						$_SESSION['logged_in']=true;
 						$_SESSION['user_name']=$row['login_email'];

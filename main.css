@@ -2,7 +2,13 @@
 	font-family:monospace;
 }
 
+h3{
+	margin-top:14px;
+	margin-bottom:2px;
+}
+
 body{
+	position:relative;
 	background:#eee;
 }
 
@@ -19,6 +25,9 @@ iframe{
 	right:10px;
 	border:2px solid #444;
 	padding:16px;
+	padding-top:0px;
+	display:block;
+	z-index:10;
 }
 
 #loginform label,
@@ -30,15 +39,16 @@ iframe{
 }
 
 .warning{
-	padding:8px 2px;
+	padding:8px 8px;
 	margin:2px -3px;
-	background:ffeeee;
+	background:#eedddd;
 	border:1px solid #ddcccc;
 	color:#440000;
 	font-size:110%;
-	max-width:250px;
+	margin-right:320px;
 }
 
 .warning span:first-child{
 	font-weight:bold;
 }
+

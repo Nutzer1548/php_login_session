@@ -24,6 +24,9 @@
 		font:monospace;
 		font-size:12px;
 	}
+	label, input[type=checkbox], input[type="submit"]{
+		cursor:pointer;
+	}
 </style>
 </head><body>
 
@@ -40,9 +43,12 @@
 			You <i>really</i> should delete this installation-folder after doing so, to prevent others from resetting your database.
 			<br><br/>
 			<input type="hidden" name="step" value="1"/>
+			<input type="checkbox" name="demodata" value="1" checked="cecked" id="demodata"/><label for="demodata">Include testing data</label>
+			<br><br/>
 		';
 	}else if($step==1){
 		$script=file_get_contents('db_table.sql');
+		if(@$_POST['demodata']=="1") $script.=@file_get_contents('db_table_demodata.sql');
 		$script_queries=explode($script,';'); $query_count=0;
 		echo 'Step 1:<br/>
 			Inserting data:<br><div class="script">'.$script.'</div>
