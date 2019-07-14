@@ -16,6 +16,8 @@ output/return-array:
 
 function register_account(){
 	global $sql;
+	//require('config.php');
+	global $PLS;
 	$ret['ok']=false;
 	$ret['error']=null;
 
@@ -35,26 +37,26 @@ function register_account(){
 	// already registered?
 	$result=$sql->query('select id from users where login_email="'.$email.'";');
 	if(!is_object($result)){
-		$ret['errorr']='database error, please contact admin.';
+		$ret['errorr']=$PLS['error']['db_unexpected'];
 		return $ret;
 	}
 	$num_rows=$result->num_rows;
 	$result->free();
 	if($num_rows!=0){
-		$ret['error']='Email is already used. Can\'t create another account with it.';
+		$ret['error']=$PLS['error']['register_email_in_use'];
 		return $ret;
 	}
 
 	// banned?
 	$result=$sql->query('select email from blocked_email where email="'.$email.'";');
 	if(!is_object($result)){
-		$ret['error']='database error, please contact admin';
+		$ret['error']=$PLS['error']['db_unexpected'];
 		return $ret;
 	}
 	$num_rows=$result->num_rows;
 	$result->free();
 	if($num_rows!=0){
-		$ret['error']='Email is banned. Can\'t create account with it!';
+		$ret['error']=$PLS['error']['register_email_ban'];
 		return $ret;
 	}
 
@@ -62,7 +64,7 @@ function register_account(){
 	$q='insert into users (login_email, login_pass, register_date, flags) values ("'.$email.'", "'.$password.'", curdate(), 0);';
 	$result=$sql->query($q);
 	if($result!==true){
-		$ret['error']='Couldn\'t create account. Try again later or contact admin.';
+		$ret['error']=$PLS['error']['register_cant_create'];
 		return $ret;
 	}
 	$user_id=$sql->insert_id;
@@ -74,7 +76,7 @@ function register_account(){
 	$verify_string=$sql->escape_string($verify_string);
 	$result=$sql->query('insert into task_activate_user (user_id, verify_string) values ('.$user_id.', "'.$verify_string.'")');
 	if($result!==true){
-		$ret['error']='Unable to create activation task. Please contact admin.'.$sql->error;
+		$ret['error']=$PLS['error']['register_cant_task'];
 		return $ret;
 	}
 
@@ -104,7 +106,7 @@ include('config.php');
 	}
 
 	if(false===mail($to, $subject, $message)){
-		$ret['error']='Couldn\'t send activation email. Please contact admin.';
+		$ret['error']=$PLS['error']['register_email_send'];
 		return $ret;
 	}
 
