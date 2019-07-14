@@ -38,6 +38,12 @@ $PLS['error']=array(
 	'register_cant_create' => 'Couldn\'t create account. Try again later or contact the webmaster.',
 	'register_cant_task' => 'Unable to create activation task. Please contact the webmaster to fix this problem.',
 
+	'ban_nodo' => 'Nothing to ban. Possibly already banned or never registered.',
+	'ban_keymail' => 'Key and/or email doesn\'t match.',
+	'ban_verify' => 'Unable to ban email. This is a database problem, please contact the webmaster to fix this problem.',
+	'ban_delete' => 'Unable to delete account. This is a database problem, please contact admin.',
+	'ban_task' => 'Couldn\'t remove activation task. Please contact the webmaster to fix this problem.',
+
 	'dummy' => null
 );
 

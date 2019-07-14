@@ -86,7 +86,6 @@ function register_account(){
 	// send email with activation-link+
 	// todo: build a template for this.
 	//include('config.php');
-include('config.php');
 	$to=$email; // <- is sql-escaped, but that's not bad. valid emails will not be altered by sql-escape// $_POST['email'];
 	$subject='Welcome. Verify your account.';
 
