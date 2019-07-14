@@ -23,8 +23,15 @@ $PLS['mail_registration']=__DIR__.'/registration.mail';
 $PLS['error']=array(
 	'query' => 'Failed database query! Please contact the webmaster to fix this problem.',
 	'db_unexpected' =>'Database shows unexpected behavier. Please contact the webmaster to fix this problem.',
+
 	'login_failed' =>'Login attempt failed!',
 	'login_not_activated' => 'Your account still needs to be activated. Please check your inbox or your spamfolder, you should have received an activation link.',
+
+	'activation_nodo' => 'Nothing to activate. Possibly already activated or never registered.',
+	'activation_keymail' => 'Key and/or email doesn\'t match.',
+	'activation_verify' => 'Unable to verify account. This is a database problem, please contact admin.',
+	'activation_task' => 'Couldn\'t remove activation task. Please contact the webmaster to fix this problem.',
+
 	'dummy' => null
 );
 

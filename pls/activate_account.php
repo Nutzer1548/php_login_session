@@ -11,9 +11,10 @@ todo: when it's realy important to contact the admin, perhaps contact the admin 
 */
 
 @require_once('db.php');
-
 function activate_account(){
 	global $sql;
+	require 'config.php';
+
 	$ret['ok']=false;
 	$ret['error']=null;
 
@@ -30,18 +31,18 @@ function activate_account(){
 	$result=$sql->query($q);
 
 	if(!is_object($result)){
-		$ret['error']='Unexpected database result, please contact admin.';//.$sql->error;
+		$ret['error']=$PLS['error']['db_unexpected'];
 		return $ret;
 	}
 
 	if($result->num_rows==0){
-		$ret['error']='Nnothing to activate. Possibillities: 1) already activated, 2) never registered.';//.$result->num_rows.'<hr/>'.$q;
+		$ret['error']=$PLS['error']['activation_nodo'];
 		$result->free();
 		return $ret;
 	}
 
 	if($result->num_rows!=1){
-		$ret['error']='To many entries found. Please contact administrator.';
+		$ret['error']=$PLS['error']['db_unexpected'];
 		$result->free();
 		return $ret;
 	}
@@ -49,7 +50,7 @@ function activate_account(){
 	$row=$result->fetch_assoc();
 	$result->free();
 	if($row['verify_string']!==$key && $row['login_email']){// invalid key/email
-		$ret['error']='Key or email doesn\'t match.';
+		$ret['error']=$PLS['error']['activation_keymail'];
 		return $ret;
 	}
 
@@ -57,14 +58,14 @@ function activate_account(){
 	// |- 1. activate account
 	$result_user=$sql->query('update users set flags=flags|0x01 where id='.$row['u_id'].';');
 	if($result_user===false){
-		$ret['error']='Unable to verify account. This is a database problem, please contact admin.';
+		$ret['error']=$PLS['error']['activation_verify'];
 		return $ret;
 	}
 	$ret['ok']=true;
 	// '- 2. delete task
 	$result_task=$sql->query('delete from task_activate_user where id='.$row['t_id'].';');
 	if($result_task===false){
-		$ret['error']='Couldn\'t remove activation task. Please contact admin.';
+		$ret['error']=$PLS['error']['activation_task'];
 	}
 	
 	

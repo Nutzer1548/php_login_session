@@ -59,7 +59,5 @@ Tasks:
 
 Done:
 =====
-Insertion of demodata is now choosable
-Cleaned up informations/instructions in readme.txt
-Uniformed localisation.
-Customizable messages in config.php
+interface.php removed.
+
