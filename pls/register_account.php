@@ -24,7 +24,7 @@ function register_account(){
 	if(!isset($_POST['login_reg'])) return $ret;
 
 	if(!isset($_POST['email']) || !isset($_POST['password'])){
-		$ret['error']='email and password needed!';
+		$ret['error']=$PLS['error']['register_data_missing'];
 		return $ret;
 	}
 
@@ -84,14 +84,12 @@ function register_account(){
 	$ret['ok']=true;
 
 	// send email with activation-link+
-	// todo: build a template for this.
-	//include('config.php');
 	$to=$email; // <- is sql-escaped, but that's not bad. valid emails will not be altered by sql-escape// $_POST['email'];
 	$subject='Welcome. Verify your account.';
 
-	$token='?key='.urlencode($activate_key).'&email='.urlencode($_POST['email']);
-	$link_activate=$PLS['page']['activate'].$token;
-	$link_ban=$PLS['page']['ban'].$token;
+	$token='&key='.urlencode($activate_key).'&email='.urlencode($_POST['email']);
+	$link_activate=$PLS['page']['activate'].'?action=activate'.$token;
+	$link_ban=$PLS['page']['ban'].'?action=ban'.$token;
 
 	$message=file_get_contents($PLS['mail_registration']);
 	$message=str_replace(

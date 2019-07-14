@@ -15,7 +15,7 @@ What you need:
 ==============
 - a webserver with php7 support
 - a mysql/mariadb database server
-- a little knowledge about php, to incorporate the scriptlogic into your pages.
+- a little knowledge about php, to incorporate the script logic into your pages.
 
 
 
@@ -37,6 +37,7 @@ Customisation / Integration:
 ============================
 - include the 'session.php' topmost in your php-pages (mainly index.php) with
   <?php require_once('session.php'); ?>
+- edit pls/config.php to customize pages and error messages.
 - to define your own target pages such as 'activate.php' for activating email,
   edit pls/config.php. In thes pages, you have to call the logic from the
   corresponding pls-script-files. But that's easy. Look inside the examples
@@ -56,7 +57,10 @@ Tasks:
 [ ] use php exception handling 
 [ ] add some 'confirm' checkbox to the registration form
 [ ] prevent spamming by ip address.
+[ ] plausibility check for emails
+
 
 Done:
 =====
-
+missing error message from register_account.php now in config.php
+introduced 'action=activate' and 'action=ban' for the respective links, so it's not needed for the links to lead to different files.

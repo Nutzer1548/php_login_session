@@ -32,6 +32,7 @@ $PLS['error']=array(
 	'activation_verify' => 'Unable to verify account. This is a database problem, please contact the webmaster to fix this problem.',
 	'activation_task' => 'Couldn\'t remove activation task. Please contact the webmaster to fix this problem.',
 
+	'register_data_missing' => 'Email and password missing.',
 	'register_email_in_use' => 'Email is already used. Can\'t create another account with it.',
 	'register_email_ban' => 'Email is banned. Can\'t create account with it!',
 	'register_email_send' => 'Couldn\'t send activation email. Please contact the webmaster to fix this problem.',
