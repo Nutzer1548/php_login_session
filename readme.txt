@@ -56,11 +56,12 @@ Tasks:
 [ ] delete unactivated users after x days 
 [ ] use php exception handling 
 [ ] add some 'confirm' checkbox to the registration form
-[ ] prevent spamming by ip address.
 [ ] plausibility check for emails
 
 
 Done:
 =====
-missing error message from register_account.php now in config.php
-introduced 'action=activate' and 'action=ban' for the respective links, so it's not needed for the links to lead to different files.
+- include/require-paranoia: make includes use full path.
+- prevent spamming by ip address.
+ 
+

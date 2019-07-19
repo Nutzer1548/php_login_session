@@ -29,4 +29,10 @@ create table task_activate_user(
 	primary key (id)
 )default charset=utf8 collate=utf8_unicode_ci;
 
-
+drop table if exists flood_control;
+create table flood_control(
+	ip varchar(40) not null,
+	hits int unsigned not null default 0,
+	time datetime not null,
+	primary key(ip)
+);

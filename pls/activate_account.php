@@ -10,7 +10,7 @@ output/return-array:
 todo: when it's realy important to contact the admin, perhaps contact the admin automatically per email.
 */
 
-@require_once('db.php');
+@require_once(__DIR__.'/db.php');
 function activate_account(){
 	global $sql;
 	require 'config.php';

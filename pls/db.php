@@ -1,7 +1,7 @@
 <?php
 /* creates a conenction to the mysql server and leaves it open as $sql */
 // TODO: in case of error: let noone see conenction details
-@require_once('db_config.php');
+@require_once(__DIR__.'/db_config.php');
 
 
 // connect to mysql server
